@@ -516,13 +516,19 @@ function rejectLogOut() {
 
 function apply(job) {
     if (localStorage.getItem("loggedIn") == "true") {
-        if (job == "job1") {
-            document.location.href = "application.html"
-        } else if (job == "job2") {
-            document.location.href = "application-2.html";
-        } else if (job == "job3") {
-            document.location.href = "application-3.html";
-        }
+        let jobsArray = Object.values(jobList.id);
+        let filteredJob = jobsArray.filter(value => value.id == job);
+        localStorage.setItem("applicationTarget", JSON.stringify(filteredJob[0]));
+        console.log("im applying!")
+
+
+        // if (job == "job1") {
+        //     document.location.href = "application.html"
+        // } else if (job == "job2") {
+        //     document.location.href = "application-2.html";
+        // } else if (job == "job3") {
+        //     document.location.href = "application-3.html";
+        // }
     } else {
         pleaseLogIn.style.display = "block";
         jobListWrapper.style.opacity = ".3";
@@ -1010,12 +1016,38 @@ if (document.body.contains(jobOpenings)) {
         
         let jobApplyDiv = document.createElement('div');
         jobApplyDiv.classList.add('job-apply');
-    
-        jobApplyDiv.innerHTML = `<h1>${job.jobTitle}</h1>
-        <p>${job.location}</p>
-        <p>${job.salary} per year</p>
-        <button type='button' class='apply' onclick='apply(${job.id})'>Apply</button>
-        `;
+
+        let jobApplyTitle = document.createElement('h2');
+        jobApplyTitle.innerHTML = `${job.jobTitle}`;
+        jobApplyDiv.appendChild(jobApplyTitle);
+
+        let jobApplyLocation = document.createElement('p');
+        jobApplyLocation.innerHTML = `${job.location}`;
+        jobApplyDiv.appendChild(jobApplyLocation);
+
+        let jobApplySalary = document.createElement('p');
+        jobApplySalary.innerHTML = `${job.salary}`;
+        jobApplyDiv.appendChild(jobApplySalary);
+
+        let jobApplyButton = document.createElement('button');
+        jobApplyButton.innerHTML = "Apply";
+        jobApplyButton.classList.add('apply');
+        jobApplyButton.type = "button";
+        jobApplyButton.addEventListener("click", (e) => {
+            // if (localStorage.getItem("loggedIn") == "true") {
+                //     let jobsArray = Object.values(jobList.id);
+                //     let filteredJob = jobsArray.filter(value => value.id == job);
+                //     localStorage.setItem("applicationTarget", JSON.stringify(filteredJob[0]));
+                // }     
+                console.log("im applying!");
+            });
+        jobApplyDiv.appendChild(jobApplyButton);
+
+        // jobApplyDiv.innerHTML = `<h1>${job.jobTitle}</h1>
+        // <p>${job.location}</p>
+        // <p>${job.salary} per year</p>
+        // <button type='button' class='apply' onclick='apply(${job.id})'>Apply</button>
+        // `;
 
         let jobInfoWrapper = document.createElement('div');
         jobInfoWrapper.id = "job-info";
