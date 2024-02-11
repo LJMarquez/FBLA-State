@@ -990,9 +990,9 @@ if (document.body.contains(jobOpenings)) {
     jobList.map((job) => {
         let jobDiv = document.createElement('div');
         jobDiv.classList.add('job-container');
-        jobDiv.addEventListener('click', () => {
-            jobListColumn.innerHTML = job.jobContainer;
-        })
+
+        // jobDiv.id = `${job.id}`;
+
 
         let jobTitleHeader = document.createElement('h1');
         jobTitleHeader.textContent = `${job.jobTitle}`;
@@ -1017,37 +1017,30 @@ if (document.body.contains(jobOpenings)) {
         let jobApplyDiv = document.createElement('div');
         jobApplyDiv.classList.add('job-apply');
 
-        let jobApplyTitle = document.createElement('h2');
-        jobApplyTitle.innerHTML = `${job.jobTitle}`;
-        jobApplyDiv.appendChild(jobApplyTitle);
+        // let jobApplyTitle = document.createElement('h1');
+        // jobApplyTitle.innerHTML = `${job.jobTitle}`;
+        // jobApplyDiv.appendChild(jobApplyTitle);
 
-        let jobApplyLocation = document.createElement('p');
-        jobApplyLocation.innerHTML = `${job.location}`;
-        jobApplyDiv.appendChild(jobApplyLocation);
+        // let jobApplyLocation = document.createElement('p');
+        // jobApplyLocation.innerHTML = `${job.location}`;
+        // jobApplyDiv.appendChild(jobApplyLocation);
 
-        let jobApplySalary = document.createElement('p');
-        jobApplySalary.innerHTML = `${job.salary}`;
-        jobApplyDiv.appendChild(jobApplySalary);
+        // let jobApplySalary = document.createElement('p');
+        // jobApplySalary.innerHTML = `${job.salary}`;
+        // jobApplyDiv.appendChild(jobApplySalary);
 
-        let jobApplyButton = document.createElement('button');
-        jobApplyButton.innerHTML = "Apply";
-        jobApplyButton.classList.add('apply');
-        jobApplyButton.type = "button";
-        jobApplyButton.addEventListener("click", (e) => {
-            // if (localStorage.getItem("loggedIn") == "true") {
-                //     let jobsArray = Object.values(jobList.id);
-                //     let filteredJob = jobsArray.filter(value => value.id == job);
-                //     localStorage.setItem("applicationTarget", JSON.stringify(filteredJob[0]));
-                // }     
-                console.log("im applying!");
-            });
-        jobApplyDiv.appendChild(jobApplyButton);
-
-        // jobApplyDiv.innerHTML = `<h1>${job.jobTitle}</h1>
-        // <p>${job.location}</p>
-        // <p>${job.salary} per year</p>
-        // <button type='button' class='apply' onclick='apply(${job.id})'>Apply</button>
-        // `;
+        // let jobApplyButton = document.createElement('button');
+        // jobApplyButton.innerHTML = "Apply";
+        // jobApplyButton.classList.add('apply');
+        // jobApplyButton.type = "button";
+        
+        // jobApplyDiv.appendChild(jobApplyButton);
+        
+        jobApplyDiv.innerHTML = `<h1>${job.jobTitle}</h1>
+        <p>${job.location}</p>
+        <p>${job.salary} per year</p>
+        <button type='button' class='apply' name='${job.id}'>Apply</button>
+        `;
 
         let jobInfoWrapper = document.createElement('div');
         jobInfoWrapper.id = "job-info";
@@ -1108,7 +1101,16 @@ if (document.body.contains(jobOpenings)) {
 
         let container = `${jobApplyDiv.outerHTML} ${jobInfoWrapper.outerHTML}`;
         job.jobContainer = container;
+
+        jobListColumn.innerHTML = jobList[0].jobContainer;
+        
+        jobDiv.addEventListener('click', () => {
+            jobListColumn.innerHTML = job.jobContainer;
+
+        })
+        
     })
+
 
     let jobDivs = document.querySelectorAll('.job-container');
     jobDivs.forEach((div) => {
@@ -1117,10 +1119,20 @@ if (document.body.contains(jobOpenings)) {
                 wrapper.style.border = ".3vw solid white";
             })
             e.currentTarget.style.border = ".3vw solid #7A9AE4";
+
+            let applyButton = document.querySelector('.apply');
+            applyButton.addEventListener("click", (event) => {
+                let targetJob = event.target.name;
+                let jobsArray = Object.values(jobList);
+                let filteredJob = jobsArray.filter(value => value.id == targetJob);
+            })
         })
     })
 
-    jobListColumn.innerHTML = jobList[0].jobContainer;
+    let applyButton = document.querySelector('.apply');
+    applyButton.addEventListener("click", (event) => {
+        console.log("hello");
+    })
 
 }
 
