@@ -464,7 +464,7 @@ nav > img {
     background-color: red;
 }
 
-#log-out-confirmation {
+/* #log-out-confirmation {
     background-color: white;
     width: 30vw;
     color: #070436;
@@ -478,7 +478,7 @@ nav > img {
     display: none;
     text-align: center;
     position: fixed;
-}
+} */
 
 #confirm-log-out {
     background-color: white;
@@ -489,23 +489,6 @@ nav > img {
     margin: 1vh;
 }
 
-#confirm-log-out:hover {
-    text-decoration: underline;
-}
-
-#reject-log-out {
-    background-color: #070436;
-    color: white;
-    border: .5vh solid #070436;
-    font-family: 'Ubuntu', sans-serif;
-    width: 30%;
-    font-size: 2vw;
-    margin: 1vh;
-}
-
-#reject-log-out:hover {
-    text-decoration: underline;
-}
 
 #profile-picture {
     border-radius: 50%;
@@ -680,22 +663,21 @@ nav > img {
     display: none;
 }
 
-#please-log-in {
+.modal {
     background-color: white;
-    width: 30vw;
+    width: 35vw;
     color: #070436;
-    position: fixed;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    top: 40vh;
-    padding: 1vh;
+    padding: 2vh;
     font-size: 1.6vw;
-    display: none;
     text-align: center;
-    
-    position: fixed;
+    border-radius: 1rem;
+    /* transition: text-decoration 5s; */
+}
+
+.modal > button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    /* transition: text-decoration 5s; */
 }
 
 #go-to-log-in {
@@ -707,7 +689,7 @@ nav > img {
     margin: 1vh;
 }
 
-#back-to-job-page {
+.close-modal {
     background-color: #070436;
     color: white;
     border: .5vh solid #070436;
@@ -1056,11 +1038,11 @@ footer {
     text-decoration: underline;
 }
 
-#go-to-log-in:hover {
+.close-modal:hover {
     text-decoration: underline;
 }
 
-#back-to-job-page:hover {
+.close-modal:hover {
     text-decoration: underline;
 }
 

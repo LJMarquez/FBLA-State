@@ -371,11 +371,18 @@
     <!-- ******************************************************************************************************** -->
 
 
-    <div id="please-log-in">
+    <!-- <div id="please-log-in">
         <h3>Log in to start applying today!</h3>
         <button type="button" id="go-to-log-in" onclick="goToLogIn()">Log In</button>
         <button type="button" id="back-to-job-page" onclick="backToJobPage()">Cancel</button>
-    </div>
+    </div> -->
+
+    <dialog class="modal">
+        <h2>Log in to start applying today!</h2>
+        <button type="button" id="go-to-log-in" onclick="goToLogIn()">Log In</button>
+        <button type="button" class="close-modal">Cancel</button>
+    </dialog>
+
     <script src="fbla.js"></script>
 </body>
 </html>

@@ -89,10 +89,17 @@
             </div> -->
         </div>
         
-        <div id="log-out-confirmation">
+        <!-- <div id="log-out-confirmation">
             <h1>Are you sure you want to log out?</h1>
             <button id="confirm-log-out" onclick="confirmLogOut()">Yes</button><button id="reject-log-out" onclick="rejectLogOut()">No</button>
-        </div>
+        </div> -->
+
+        <dialog class="modal">
+            <h1>Are you sure you want to log out?</h1>
+            <button id="confirm-log-out" onclick="confirmLogOut()">Yes</button>
+            <button type="button" class="close-modal">No</button>
+        </dialog>
+    
 
     <script src="fbla.js"></script>
 </body>

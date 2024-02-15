@@ -1,5 +1,5 @@
-window.addEventListener("DOMContentLoaded", () => {
-
+// window.addEventListener("DOMContentLoaded", () => {
+// });
 
 
 //global element
@@ -132,7 +132,9 @@ const jobOpenings = document.getElementById("job-openings");
 const jobListColumn = document.getElementById("job-list-column-2");
 // const jobInfo = document.getElementById("job-info");
 
-const pleaseLogIn = document.getElementById('please-log-in');
+// const pleaseLogIn = document.getElementById('please-log-in');
+const modal = document.querySelector('.modal');
+const modalClose = document.querySelector('.close-modal');
 const noApplications = document.getElementById('no-applications');
 const jobListWrapper = document.getElementById('job-list-wrapper');
 
@@ -493,8 +495,7 @@ function showSignupPassword() {
 
 //log out functions, changes logged in state
 function logOut() {
-    profilePageWrapper.style.opacity = ".3";
-    logOutConfirmation.style.display = "block";
+    modal.showModal();
 }
 
 function confirmLogOut() {
@@ -507,45 +508,48 @@ function confirmLogOut() {
 }
 
 function rejectLogOut() {
-    profilePageWrapper.style.opacity = "1";
-    logOutConfirmation.style.display = "none";
+    modal.close();
 }
 
 
 //apply functions to take the user to the application pages
 
-function apply(job) {
-    if (localStorage.getItem("loggedIn") == "true") {
-        let jobsArray = Object.values(jobList.id);
-        let filteredJob = jobsArray.filter(value => value.id == job);
-        localStorage.setItem("applicationTarget", JSON.stringify(filteredJob[0]));
-        console.log("im applying!")
-
-
-        // if (job == "job1") {
-        //     document.location.href = "application.html"
-        // } else if (job == "job2") {
-        //     document.location.href = "application-2.html";
-        // } else if (job == "job3") {
-        //     document.location.href = "application-3.html";
-        // }
-    } else {
-        pleaseLogIn.style.display = "block";
-        jobListWrapper.style.opacity = ".3";
-    }
-}
+// function apply(job) {
+//     if (localStorage.getItem("loggedIn") == "true") {
+//         let jobsArray = Object.values(jobList.id);
+//         let filteredJob = jobsArray.filter(value => value.id == job);
+//         localStorage.setItem("applicationTarget", JSON.stringify(filteredJob[0]));
+//         console.log("im applying!")
+//     } else {
+//         pleaseLogIn.style.display = "block";
+//         jobListWrapper.style.opacity = ".3";
+//     }
+// }
 
 
 //functions to direct the user to job page or log in page
 function goToLogIn() {
-    jobListWrapper.style.opacity = "1";
-    pleaseLogIn.style.display = "none";
     document.location.href = "log-in.html";
 }
 
-function backToJobPage() {
-    jobListWrapper.style.opacity = "1";
-    pleaseLogIn.style.display = "none";
+if (document.body.contains(modal)) {
+    modalClose.addEventListener("click", () => {
+        modal.close();
+    })
+}
+
+if (document.body.contains(modal)) {
+    modal.addEventListener("click", e => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom 
+        ) {
+            modal.close();
+        }
+    })
 }
 
 //variables to capture the date the application was submitted
@@ -553,7 +557,6 @@ const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth() + 1;
 const day = date.getDate();
-// const fullDate = month + "/" + day + "/" + year;
 const fullDate = `${month}/${day}/${year}`;
 
 const dateApplied1 = document.getElementById('job-1-date-applied');
@@ -1122,16 +1125,25 @@ if (document.body.contains(jobOpenings)) {
 
             let applyButton = document.querySelector('.apply');
             applyButton.addEventListener("click", (event) => {
-                let targetJob = event.target.name;
-                let jobsArray = Object.values(jobList);
-                let filteredJob = jobsArray.filter(value => value.id == targetJob);
+                if (localStorage.getItem("loggedIn") == 'true') {
+                    let targetJob = event.target.name;
+                    let jobsArray = Object.values(jobList);
+                    let filteredJob = jobsArray.filter(value => value.id == targetJob);
+                    console.log(targetJob);
+                } else {
+                    modal.showModal();
+                }
+                
             })
         })
     })
 
     let applyButton = document.querySelector('.apply');
     applyButton.addEventListener("click", (event) => {
-        console.log("hello");
+        let targetJob = event.target.name;
+        let jobsArray = Object.values(jobList);
+        let filteredJob = jobsArray.filter(value => value.id == targetJob);
+        console.log(targetJob);
     })
 
 }
@@ -1157,5 +1169,3 @@ if (document.body.contains(jobOpenings)) {
 // }
 
 
-
-});
