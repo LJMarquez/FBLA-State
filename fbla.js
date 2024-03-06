@@ -138,21 +138,21 @@ const modalClose = document.querySelector('.close-modal');
 const noApplications = document.getElementById('no-applications');
 const jobListWrapper = document.getElementById('job-list-wrapper');
 
-const job1Container = document.getElementById('job-1-container');
-const job2Container = document.getElementById('job-2-container');
-const job3Container = document.getElementById('job-3-container');
+// const job1Container = document.getElementById('job-1-container');
+// const job2Container = document.getElementById('job-2-container');
+// const job3Container = document.getElementById('job-3-container');
 
-const jobApply1 = document.getElementById('job-apply-1');
-const jobApply2 = document.getElementById('job-apply-2');
-const jobApply3 = document.getElementById('job-apply-3');
+const jobApply = document.getElementById('job-apply');
+// const jobApply2 = document.getElementById('job-apply-2');
+// const jobApply3 = document.getElementById('job-apply-3');
 
 const jobInfo1 = document.getElementById('job-info-1');
-const jobInfo2 = document.getElementById('job-info-2');
-const jobInfo3 = document.getElementById('job-info-3');
+// const jobInfo2 = document.getElementById('job-info-2');
+// const jobInfo3 = document.getElementById('job-info-3');
 
-const job1 = document.getElementById("job-1");
-const job2 = document.getElementById("job-2");
-const job3 = document.getElementById("job-3");
+// const job1 = document.getElementById("job-1");
+// const job2 = document.getElementById("job-2");
+// const job3 = document.getElementById("job-3");
 
 //profile elements
 const jobsAppliedFor = document.getElementById('jobs-applied-for');
@@ -170,24 +170,27 @@ const profilePageWrapper = document.getElementById('profile-page-wrapper');
 
 
 //application elements
-const application1Form = document.getElementById("application-1-form");
-const application2Form = document.getElementById("application-2-form");
-const application3Form = document.getElementById("application-3-form");
+const applicationForm = document.getElementById("application-form");
+// const application2Form = document.getElementById("application-2-form");
+// const application3Form = document.getElementById("application-3-form");
 
-const application1Done = document.getElementById('application-1-done');
-const application2Done = document.getElementById('application-2-done');
-const application3Done = document.getElementById('application-3-done');
+const applicationDone = document.getElementById('application-done');
+// const application2Done = document.getElementById('application-2-done');
+// const application3Done = document.getElementById('application-3-done');
 
-const application1Info = document.getElementById('application-1-info');
-const application2Info = document.getElementById('application-2-info');
-const application3Info = document.getElementById('application-3-info');
+const applicationInfo = document.getElementById('application-info');
+// const application1Info = document.getElementById('application-1-info');
+// const application2Info = document.getElementById('application-2-info');
+// const application3Info = document.getElementById('application-3-info');
 
-const submitApplicationNotice1 = document.getElementById('submit-application-notice-1');
-const submitApplicationNotice2 = document.getElementById('submit-application-notice-2');
-const submitApplicationNotice3 = document.getElementById('submit-application-notice-3');
+const submitApplicationNotice = document.getElementById('submit-application-notice');
+// const submitApplicationNotice2 = document.getElementById('submit-application-notice-2');
+// const submitApplicationNotice3 = document.getElementById('submit-application-notice-3');
 
 const applicationWrapper = document.getElementById('application-wrapper');
 
+// const applicationName = document.querySelectorAll('.application-name');
+const applicationName = document.getElementById('application-name');
 const firstNameInput = document.getElementById('firstName-input');
 const middleNameInput = document.getElementById('middleName-input');
 const lastNameInput = document.getElementById('lastName-input');
@@ -202,6 +205,7 @@ const educationSelect = document.getElementById('education-select');
 const skillInput = document.getElementById('skill-input');
 const resumeInput = document.getElementById('resume-input');
 
+const applicationNameDisplay = document.getElementById('first-name-display');
 const firstNameDisplay = document.getElementById('first-name-display');
 const middleNameDisplay = document.getElementById('middle-name-display');
 const lastNameDisplay = document.getElementById('last-name-display');
@@ -220,7 +224,6 @@ const middleNameHolder = document.getElementById('middle-name-holder');
 const certificationHolder = document.getElementById('certification-holder');
 const skillsHolder = document.getElementById('skills-holder');
 const resumeHolder = document.getElementById('resume-holder');
-
 const incompleteApplicationNotice = document.getElementById('incomplete-application-notice');
 
 
@@ -232,6 +235,7 @@ let profilePictureSrc;
 let validPassword = false;
 let storedUsers = JSON.parse(localStorage.getItem("users"));
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+let targetJob;
 
 
 
@@ -567,7 +571,10 @@ const dateApplied3 = document.getElementById('job-3-date-applied');
 
 //functions for submitting the applications
 //these functions store the application info in local storage for later access
-function confirmSubmit1() {
+function confirmSubmit() {
+    let storedJobsArray = Object.values(jobList);
+    let filteredJob = storedJobsArray.filter(value => value.id == localStorage.getItem("targetJob"));
+
     let jobApplicationInfo =
     { jobApplicationInfo: {
         firstName: firstNameInput.value,
@@ -584,7 +591,7 @@ function confirmSubmit1() {
         skills: skillInput.value,
         resume: resumeInput.value,
         dateApplied: fullDate,
-        job: "job-1"
+        job: `${filteredJob[0].id}`
     }};
     storedUsers.filter(value => value.userName == currentUser[0].userName && value.passWord == currentUser[0].passWord)[0].jobsApplied.push(jobApplicationInfo);
     localStorage.setItem("users", JSON.stringify(storedUsers));
@@ -597,65 +604,65 @@ function confirmSubmit1() {
     application1Done.style.display = "block";
 }
 
-function confirmSubmit2() {
-    let jobApplicationInfo =
-    { jobApplicationInfo: {
-        firstName: firstNameInput.value,
-        middleName: middleNameInput.value,
-        lastName: lastNameInput.value,
-        birthday: birthdayInput.value,
-        phoneNumber: phoneNumberInput.value,
-        email: emailInput.value,
-        socialSecurity: socialSecurityInput.value,
-        address: addressInput.value,
-        experience: experienceSelect.value,
-        certifications: certificationInput.value,
-        education: educationSelect.value,
-        skills: skillInput.value,
-        resume: resumeInput.value,
-        dateApplied: fullDate,
-        job: "job-2"
-    }};
-    storedUsers.filter(value => value.userName == currentUser[0].userName && value.passWord == currentUser[0].passWord)[0].jobsApplied.push(jobApplicationInfo);
-    localStorage.setItem("users", JSON.stringify(storedUsers));
-    currentUser[0].jobsApplied.push(jobApplicationInfo);
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+// function confirmSubmit2() {
+//     let jobApplicationInfo =
+//     { jobApplicationInfo: {
+//         firstName: firstNameInput.value,
+//         middleName: middleNameInput.value,
+//         lastName: lastNameInput.value,
+//         birthday: birthdayInput.value,
+//         phoneNumber: phoneNumberInput.value,
+//         email: emailInput.value,
+//         socialSecurity: socialSecurityInput.value,
+//         address: addressInput.value,
+//         experience: experienceSelect.value,
+//         certifications: certificationInput.value,
+//         education: educationSelect.value,
+//         skills: skillInput.value,
+//         resume: resumeInput.value,
+//         dateApplied: fullDate,
+//         job: "job-2"
+//     }};
+//     storedUsers.filter(value => value.userName == currentUser[0].userName && value.passWord == currentUser[0].passWord)[0].jobsApplied.push(jobApplicationInfo);
+//     localStorage.setItem("users", JSON.stringify(storedUsers));
+//     currentUser[0].jobsApplied.push(jobApplicationInfo);
+//     localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-    applicationWrapper.style.opacity = "1";
-    submitApplicationNotice2.style.display = "none";
-    application2Form.style.display = "none";
-    application2Done.style.display = "block";
-}
+//     applicationWrapper.style.opacity = "1";
+//     submitApplicationNotice2.style.display = "none";
+//     application2Form.style.display = "none";
+//     application2Done.style.display = "block";
+// }
 
-function confirmSubmit3() {
-    let jobApplicationInfo =
-    { jobApplicationInfo: {
-        firstName: firstNameInput.value,
-        middleName: middleNameInput.value,
-        lastName: lastNameInput.value,
-        birthday: birthdayInput.value,
-        phoneNumber: phoneNumberInput.value,
-        email: emailInput.value,
-        socialSecurity: socialSecurityInput.value,
-        address: addressInput.value,
-        experience: experienceSelect.value,
-        certifications: certificationInput.value,
-        education: educationSelect.value,
-        skills: skillInput.value,
-        resume: resumeInput.value,
-        dateApplied: fullDate,
-        job: "job-3"
-    }};
-    storedUsers.filter(value => value.userName == currentUser[0].userName && value.passWord == currentUser[0].passWord)[0].jobsApplied.push(jobApplicationInfo);
-    localStorage.setItem("users", JSON.stringify(storedUsers));
-    currentUser[0].jobsApplied.push(jobApplicationInfo);
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+// function confirmSubmit3() {
+//     let jobApplicationInfo =
+//     { jobApplicationInfo: {
+//         firstName: firstNameInput.value,
+//         middleName: middleNameInput.value,
+//         lastName: lastNameInput.value,
+//         birthday: birthdayInput.value,
+//         phoneNumber: phoneNumberInput.value,
+//         email: emailInput.value,
+//         socialSecurity: socialSecurityInput.value,
+//         address: addressInput.value,
+//         experience: experienceSelect.value,
+//         certifications: certificationInput.value,
+//         education: educationSelect.value,
+//         skills: skillInput.value,
+//         resume: resumeInput.value,
+//         dateApplied: fullDate,
+//         job: "job-3"
+//     }};
+//     storedUsers.filter(value => value.userName == currentUser[0].userName && value.passWord == currentUser[0].passWord)[0].jobsApplied.push(jobApplicationInfo);
+//     localStorage.setItem("users", JSON.stringify(storedUsers));
+//     currentUser[0].jobsApplied.push(jobApplicationInfo);
+//     localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-    applicationWrapper.style.opacity = "1";
-    submitApplicationNotice3.style.display = "none";
-    application3Form.style.display = "none";
-    application3Done.style.display = "block";
-}
+//     applicationWrapper.style.opacity = "1";
+//     submitApplicationNotice3.style.display = "none";
+//     application3Form.style.display = "none";
+//     application3Done.style.display = "block";
+// }
 
 
 //these funcitons check to make sure all of the REQUIRED fields are filled out
@@ -683,53 +690,53 @@ function rejectSubmit1() {
     applicationWrapper.style.opacity = "1";
 }
 
-function submitApplication2() {
-    if (
-        firstNameInput.value == "" ||
-        lastNameInput.value == "" ||
-        birthdayInput.value == "" ||
-        phoneNumberInput.value == "" ||
-        emailInput.value == "" ||
-        socialSecurityInput.value == "" ||
-        addressInput.value == "" ||
-        experienceSelect.value == "" ||
-        educationSelect.value == ""
-    ) {
-        incompleteApplicationNotice.style.display = "block";
-    } else {
-        incompleteApplicationNotice.style.display = "none";
-        submitApplicationNotice2.style.display = "block";
-        applicationWrapper.style.opacity = ".3"
-    }
-}
-function rejectSubmit2() {
-    submitApplicationNotice2.style.display = "none";
-    applicationWrapper.style.opacity = "1";
-}
+// function submitApplication2() {
+//     if (
+//         firstNameInput.value == "" ||
+//         lastNameInput.value == "" ||
+//         birthdayInput.value == "" ||
+//         phoneNumberInput.value == "" ||
+//         emailInput.value == "" ||
+//         socialSecurityInput.value == "" ||
+//         addressInput.value == "" ||
+//         experienceSelect.value == "" ||
+//         educationSelect.value == ""
+//     ) {
+//         incompleteApplicationNotice.style.display = "block";
+//     } else {
+//         incompleteApplicationNotice.style.display = "none";
+//         submitApplicationNotice2.style.display = "block";
+//         applicationWrapper.style.opacity = ".3"
+//     }
+// }
+// function rejectSubmit2() {
+//     submitApplicationNotice2.style.display = "none";
+//     applicationWrapper.style.opacity = "1";
+// }
 
-function submitApplication3() {
-    if (
-        firstNameInput.value == "" ||
-        lastNameInput.value == "" ||
-        birthdayInput.value == "" ||
-        phoneNumberInput.value == "" ||
-        emailInput.value == "" ||
-        socialSecurityInput.value == "" ||
-        addressInput.value == "" ||
-        experienceSelect.value == "" ||
-        educationSelect.value == ""
-    ) {
-        incompleteApplicationNotice.style.display = "block";
-    } else {
-        incompleteApplicationNotice.style.display = "none";
-        submitApplicationNotice3.style.display = "block";
-        applicationWrapper.style.opacity = ".3";
-    }
-}
-function rejectSubmit3() {
-    submitApplicationNotice3.style.display = "none";
-    applicationWrapper.style.opacity = "1";
-}
+// function submitApplication3() {
+//     if (
+//         firstNameInput.value == "" ||
+//         lastNameInput.value == "" ||
+//         birthdayInput.value == "" ||
+//         phoneNumberInput.value == "" ||
+//         emailInput.value == "" ||
+//         socialSecurityInput.value == "" ||
+//         addressInput.value == "" ||
+//         experienceSelect.value == "" ||
+//         educationSelect.value == ""
+//     ) {
+//         incompleteApplicationNotice.style.display = "block";
+//     } else {
+//         incompleteApplicationNotice.style.display = "none";
+//         submitApplicationNotice3.style.display = "block";
+//         applicationWrapper.style.opacity = ".3";
+//     }
+// }
+// function rejectSubmit3() {
+//     submitApplicationNotice3.style.display = "none";
+//     applicationWrapper.style.opacity = "1";
+// }
 
 
 
@@ -737,16 +744,26 @@ function rejectSubmit3() {
 //this code will check if the application has been filled out or not,
 //and if it has, it will display the applicant's info
 
-if (document.body.contains(application1Info)) {
+
+if (document.body.contains(applicationInfo)) {
+
+    let storedJobsArray = Object.values(jobList);
+    let filteredJob = storedJobsArray.filter(value => value.id == localStorage.getItem("targetJob"));
+    applicationName.innerHTML = `${filteredJob[0].jobTitle}`;
+
+    // if (vendors.find(e => e.Name === 'Magenic')) {
+    //   }
+    // if (arrayOfObjects.some(obj => Object.values(obj).includes(targetString))) {
+      
     
-    let jobsArray = Object.values(currentUser[0].jobsApplied);
-    let filterJob = jobsArray.filter(value => value.jobApplicationInfo.job == "job-1");
-    console.log(jobsArray);
-    console.log(filterJob);
-    
-    if (filterJob.length > 0) {
-        application1Form.style.display = "none";
-        application1Info.style.display = "block";
+    // if (filteredJob.length > 0) {
+    if (currentUser[0].jobsApplied.some(job => Object.values(job).includes(filteredJob[0].id))) {
+        // let jobsArray = Object.values(currentUser[0].jobsApplied);
+        // let filterJob = jobsArray.filter(value => value.jobApplicationInfo.job == "job-1");
+        // console.log(jobsArray);
+        // console.log(filterJob);
+        applicationForm.style.display = "none";
+        applicationInfo.style.display = "block";
         firstNameDisplay.textContent = filterJob[0].jobApplicationInfo.firstName;
         lastNameDisplay.textContent = filterJob[0].jobApplicationInfo.lastName;
         birthdayDisplay.textContent = filterJob[0].jobApplicationInfo.birthday;
@@ -802,135 +819,201 @@ if (document.body.contains(application1Info)) {
     }
 }
 
-if (document.body.contains(application2Info)) {
+
+// if (document.body.contains(application1Info)) {
     
-    let jobsArray = Object.values(currentUser[0].jobsApplied);
-    let filterJob = jobsArray.filter(value => value.jobApplicationInfo.job == "job-2");
-    console.log(jobsArray);
-    console.log(filterJob);
+//     let jobsArray = Object.values(currentUser[0].jobsApplied);
+//     let filterJob = jobsArray.filter(value => value.jobApplicationInfo.job == "job-1");
+//     console.log(jobsArray);
+//     console.log(filterJob);
     
-    if (filterJob.length > 0) {
-        application2Form.style.display = "none";
-        application2Info.style.display = "block";
-        firstNameDisplay.textContent = filterJob[0].jobApplicationInfo.firstName;
-        lastNameDisplay.textContent = filterJob[0].jobApplicationInfo.lastName;
-        birthdayDisplay.textContent = filterJob[0].jobApplicationInfo.birthday;
-        phoneNumberDisplay.textContent = filterJob[0].jobApplicationInfo.phoneNumber;
-        emailDisplay.textContent = filterJob[0].jobApplicationInfo.email;
-        socialSecurityDisplay.textContent = filterJob[0].jobApplicationInfo.socialSecurity;
-        addressDisplay.textContent = filterJob[0].jobApplicationInfo.address;
-        experienceDisplay.textContent = filterJob[0].jobApplicationInfo.experience;
+//     if (filterJob.length > 0) {
+//         application1Form.style.display = "none";
+//         application1Info.style.display = "block";
+//         firstNameDisplay.textContent = filterJob[0].jobApplicationInfo.firstName;
+//         lastNameDisplay.textContent = filterJob[0].jobApplicationInfo.lastName;
+//         birthdayDisplay.textContent = filterJob[0].jobApplicationInfo.birthday;
+//         phoneNumberDisplay.textContent = filterJob[0].jobApplicationInfo.phoneNumber;
+//         emailDisplay.textContent = filterJob[0].jobApplicationInfo.email;
+//         socialSecurityDisplay.textContent = filterJob[0].jobApplicationInfo.socialSecurity;
+//         addressDisplay.textContent = filterJob[0].jobApplicationInfo.address;
+//         experienceDisplay.textContent = filterJob[0].jobApplicationInfo.experience;
 
-        switch (filterJob[0].jobApplicationInfo.education) {
-            case "lessThanHigh":
-                educationDisplay.textContent = "Less than High School Diploma";
-                break;
-            case "high":
-                educationDisplay.textContent = "High School Diploma or GED";
-                break;
-            case "college":
-                educationDisplay.textContent = "Some College, but no Degree";
-                break;
-            case "associates":
-                educationDisplay.textContent = "Associates Degree";
-                break;
-            case "bachelor":
-                educationDisplay.textContent = "Bachelor's Degree";
-                break;
-            case "masters":
-                educationDisplay.textContent = "Masters Degree";
-                break;
-            case "professional":
-                educationDisplay.textContent = "Professional Degree";
-                break;
-            case "doctorate":
-                educationDisplay.textContent = "Doctorate";
-                break;
-        }
+//         switch (filterJob[0].jobApplicationInfo.education) {
+//             case "lessThanHigh":
+//                 educationDisplay.textContent = "Less than High School Diploma";
+//                 break;
+//             case "high":
+//                 educationDisplay.textContent = "High School Diploma or GED";
+//                 break;
+//             case "college":
+//                 educationDisplay.textContent = "Some College, but no Degree";
+//                 break;
+//             case "associates":
+//                 educationDisplay.textContent = "Associates Degree";
+//                 break;
+//             case "bachelor":
+//                 educationDisplay.textContent = "Bachelor's Degree";
+//                 break;
+//             case "masters":
+//                 educationDisplay.textContent = "Masters Degree";
+//                 break;
+//             case "professional":
+//                 educationDisplay.textContent = "Professional Degree";
+//                 break;
+//             case "doctorate":
+//                 educationDisplay.textContent = "Doctorate";
+//                 break;
+//         }
 
-        if (filterJob[0].jobApplicationInfo.middleName != "") {
-            middleNameHolder.style.display = "block";
-            middleNameDisplay.textContent = filterJob[0].jobApplicationInfo.middleName;
-        }
-        if (filterJob[0].jobApplicationInfo.certifications != "") {
-            certificationHolder.style.display = "block";
-            certificationDisplay.textContent = filterJob[0].jobApplicationInfo.certifications;
-        }
-        if (filterJob[0].jobApplicationInfo.skills != "") {
-            skillsHolder.style.display = "block";
-            skillDisplay.textContent = filterJob[0].jobApplicationInfo.skills;
-        }
-        if (filterJob[0].jobApplicationInfo.resume != "") {
-            resumeHolder.style.display = "block";
-            resumeDisplay.textContent = filterJob[0].jobApplicationInfo.resume;
-        }
-    }
-}
+//         if (filterJob[0].jobApplicationInfo.middleName != "") {
+//             middleNameHolder.style.display = "block";
+//             middleNameDisplay.textContent = filterJob[0].jobApplicationInfo.middleName;
+//         }
+//         if (filterJob[0].jobApplicationInfo.certifications != "") {
+//             certificationHolder.style.display = "block";
+//             certificationDisplay.textContent = filterJob[0].jobApplicationInfo.certifications;
+//         }
+//         if (filterJob[0].jobApplicationInfo.skills != "") {
+//             skillsHolder.style.display = "block";
+//             skillDisplay.textContent = filterJob[0].jobApplicationInfo.skills;
+//         }
+//         if (filterJob[0].jobApplicationInfo.resume != "") {
+//             resumeHolder.style.display = "block";
+//             resumeDisplay.textContent = filterJob[0].jobApplicationInfo.resume;
+//         }
+//     }
+// }
 
-if (document.body.contains(application3Info)) {
+// if (document.body.contains(application2Info)) {
     
-    let jobsArray = Object.values(currentUser[0].jobsApplied);
-    let filterJob = jobsArray.filter(value => value.jobApplicationInfo.job == "job-3");
-    console.log(jobsArray);
-    console.log(filterJob);
+//     let jobsArray = Object.values(currentUser[0].jobsApplied);
+//     let filterJob = jobsArray.filter(value => value.jobApplicationInfo.job == "job-2");
+//     console.log(jobsArray);
+//     console.log(filterJob);
     
-    if (filterJob.length > 0) {
-        application3Form.style.display = "none";
-        application3Info.style.display = "block";
-        firstNameDisplay.textContent = filterJob[0].jobApplicationInfo.firstName;
-        lastNameDisplay.textContent = filterJob[0].jobApplicationInfo.lastName;
-        birthdayDisplay.textContent = filterJob[0].jobApplicationInfo.birthday;
-        phoneNumberDisplay.textContent = filterJob[0].jobApplicationInfo.phoneNumber;
-        emailDisplay.textContent = filterJob[0].jobApplicationInfo.email;
-        socialSecurityDisplay.textContent = filterJob[0].jobApplicationInfo.socialSecurity;
-        addressDisplay.textContent = filterJob[0].jobApplicationInfo.address;
-        experienceDisplay.textContent = filterJob[0].jobApplicationInfo.experience;
+//     if (filterJob.length > 0) {
+//         application2Form.style.display = "none";
+//         application2Info.style.display = "block";
+//         firstNameDisplay.textContent = filterJob[0].jobApplicationInfo.firstName;
+//         lastNameDisplay.textContent = filterJob[0].jobApplicationInfo.lastName;
+//         birthdayDisplay.textContent = filterJob[0].jobApplicationInfo.birthday;
+//         phoneNumberDisplay.textContent = filterJob[0].jobApplicationInfo.phoneNumber;
+//         emailDisplay.textContent = filterJob[0].jobApplicationInfo.email;
+//         socialSecurityDisplay.textContent = filterJob[0].jobApplicationInfo.socialSecurity;
+//         addressDisplay.textContent = filterJob[0].jobApplicationInfo.address;
+//         experienceDisplay.textContent = filterJob[0].jobApplicationInfo.experience;
 
-        switch (filterJob[0].jobApplicationInfo.education) {
-            case "lessThanHigh":
-                educationDisplay.textContent = "Less than High School Diploma";
-                break;
-            case "high":
-                educationDisplay.textContent = "High School Diploma or GED";
-                break;
-            case "college":
-                educationDisplay.textContent = "Some College, but no Degree";
-                break;
-            case "associates":
-                educationDisplay.textContent = "Associates Degree";
-                break;
-            case "bachelor":
-                educationDisplay.textContent = "Bachelor's Degree";
-                break;
-            case "masters":
-                educationDisplay.textContent = "Masters Degree";
-                break;
-            case "professional":
-                educationDisplay.textContent = "Professional Degree";
-                break;
-            case "doctorate":
-                educationDisplay.textContent = "Doctorate";
-                break;
-        }
+//         switch (filterJob[0].jobApplicationInfo.education) {
+//             case "lessThanHigh":
+//                 educationDisplay.textContent = "Less than High School Diploma";
+//                 break;
+//             case "high":
+//                 educationDisplay.textContent = "High School Diploma or GED";
+//                 break;
+//             case "college":
+//                 educationDisplay.textContent = "Some College, but no Degree";
+//                 break;
+//             case "associates":
+//                 educationDisplay.textContent = "Associates Degree";
+//                 break;
+//             case "bachelor":
+//                 educationDisplay.textContent = "Bachelor's Degree";
+//                 break;
+//             case "masters":
+//                 educationDisplay.textContent = "Masters Degree";
+//                 break;
+//             case "professional":
+//                 educationDisplay.textContent = "Professional Degree";
+//                 break;
+//             case "doctorate":
+//                 educationDisplay.textContent = "Doctorate";
+//                 break;
+//         }
 
-        if (filterJob[0].jobApplicationInfo.middleName != "") {
-            middleNameHolder.style.display = "block";
-            middleNameDisplay.textContent = filterJob[0].jobApplicationInfo.middleName;
-        }
-        if (filterJob[0].jobApplicationInfo.certifications != "") {
-            certificationHolder.style.display = "block";
-            certificationDisplay.textContent = filterJob[0].jobApplicationInfo.certifications;
-        }
-        if (filterJob[0].jobApplicationInfo.skills != "") {
-            skillsHolder.style.display = "block";
-            skillDisplay.textContent = filterJob[0].jobApplicationInfo.skills;
-        }
-        if (filterJob[0].jobApplicationInfo.resume != "") {
-            resumeHolder.style.display = "block";
-            resumeDisplay.textContent = filterJob[0].jobApplicationInfo.resume;
-        }
-    }
-}
+//         if (filterJob[0].jobApplicationInfo.middleName != "") {
+//             middleNameHolder.style.display = "block";
+//             middleNameDisplay.textContent = filterJob[0].jobApplicationInfo.middleName;
+//         }
+//         if (filterJob[0].jobApplicationInfo.certifications != "") {
+//             certificationHolder.style.display = "block";
+//             certificationDisplay.textContent = filterJob[0].jobApplicationInfo.certifications;
+//         }
+//         if (filterJob[0].jobApplicationInfo.skills != "") {
+//             skillsHolder.style.display = "block";
+//             skillDisplay.textContent = filterJob[0].jobApplicationInfo.skills;
+//         }
+//         if (filterJob[0].jobApplicationInfo.resume != "") {
+//             resumeHolder.style.display = "block";
+//             resumeDisplay.textContent = filterJob[0].jobApplicationInfo.resume;
+//         }
+//     }
+// }
+
+// if (document.body.contains(application3Info)) {
+    
+//     let jobsArray = Object.values(currentUser[0].jobsApplied);
+//     let filterJob = jobsArray.filter(value => value.jobApplicationInfo.job == "job-3");
+//     console.log(jobsArray);
+//     console.log(filterJob);
+    
+//     if (filterJob.length > 0) {
+//         application3Form.style.display = "none";
+//         application3Info.style.display = "block";
+//         firstNameDisplay.textContent = filterJob[0].jobApplicationInfo.firstName;
+//         lastNameDisplay.textContent = filterJob[0].jobApplicationInfo.lastName;
+//         birthdayDisplay.textContent = filterJob[0].jobApplicationInfo.birthday;
+//         phoneNumberDisplay.textContent = filterJob[0].jobApplicationInfo.phoneNumber;
+//         emailDisplay.textContent = filterJob[0].jobApplicationInfo.email;
+//         socialSecurityDisplay.textContent = filterJob[0].jobApplicationInfo.socialSecurity;
+//         addressDisplay.textContent = filterJob[0].jobApplicationInfo.address;
+//         experienceDisplay.textContent = filterJob[0].jobApplicationInfo.experience;
+
+//         switch (filterJob[0].jobApplicationInfo.education) {
+//             case "lessThanHigh":
+//                 educationDisplay.textContent = "Less than High School Diploma";
+//                 break;
+//             case "high":
+//                 educationDisplay.textContent = "High School Diploma or GED";
+//                 break;
+//             case "college":
+//                 educationDisplay.textContent = "Some College, but no Degree";
+//                 break;
+//             case "associates":
+//                 educationDisplay.textContent = "Associates Degree";
+//                 break;
+//             case "bachelor":
+//                 educationDisplay.textContent = "Bachelor's Degree";
+//                 break;
+//             case "masters":
+//                 educationDisplay.textContent = "Masters Degree";
+//                 break;
+//             case "professional":
+//                 educationDisplay.textContent = "Professional Degree";
+//                 break;
+//             case "doctorate":
+//                 educationDisplay.textContent = "Doctorate";
+//                 break;
+//         }
+
+//         if (filterJob[0].jobApplicationInfo.middleName != "") {
+//             middleNameHolder.style.display = "block";
+//             middleNameDisplay.textContent = filterJob[0].jobApplicationInfo.middleName;
+//         }
+//         if (filterJob[0].jobApplicationInfo.certifications != "") {
+//             certificationHolder.style.display = "block";
+//             certificationDisplay.textContent = filterJob[0].jobApplicationInfo.certifications;
+//         }
+//         if (filterJob[0].jobApplicationInfo.skills != "") {
+//             skillsHolder.style.display = "block";
+//             skillDisplay.textContent = filterJob[0].jobApplicationInfo.skills;
+//         }
+//         if (filterJob[0].jobApplicationInfo.resume != "") {
+//             resumeHolder.style.display = "block";
+//             resumeDisplay.textContent = filterJob[0].jobApplicationInfo.resume;
+//         }
+//     }
+// }
 
 
 
@@ -1126,10 +1209,13 @@ if (document.body.contains(jobOpenings)) {
             let applyButton = document.querySelector('.apply');
             applyButton.addEventListener("click", (event) => {
                 if (localStorage.getItem("loggedIn") == 'true') {
-                    let targetJob = event.target.name;
+                    targetJob = event.target.name;
                     let jobsArray = Object.values(jobList);
                     let filteredJob = jobsArray.filter(value => value.id == targetJob);
                     console.log(targetJob);
+                    // window.open("application.html");
+                    document.location.href = "application.html";
+                    localStorage.setItem("targetJob", targetJob);
                 } else {
                     modal.showModal();
                 }
@@ -1140,13 +1226,17 @@ if (document.body.contains(jobOpenings)) {
 
     let applyButton = document.querySelector('.apply');
     applyButton.addEventListener("click", (event) => {
-        let targetJob = event.target.name;
+        targetJob = event.target.name;
         let jobsArray = Object.values(jobList);
         let filteredJob = jobsArray.filter(value => value.id == targetJob);
         console.log(targetJob);
+        document.location.href = "application.html";
+        localStorage.setItem("targetJob", targetJob);
     })
 
 }
+
+
 
 
 //scrapped logic for being able to change your profile picture, security issues with the live server

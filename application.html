@@ -26,8 +26,8 @@
    </div>
 
   <div id="page-wrapper">
-    <div id="application-1-info" class="submitted-info">
-      <h1>Software Engineer</h1>
+    <div id="application-info" class="submitted-info">
+      <h1 id="application-name-display"></h1>
       <h2>Your Info:</h2>
       <div>
         <p>First Name: <span id="first-name-display"></span></p>
@@ -47,8 +47,8 @@
     </div>
   
     <div id="application-wrapper">
-      <div id="application-1-form" class="form">
-        <h1 class="application-name">Software Engineer</h1>
+      <div id="application-form" class="form">
+        <h1 id="application-name"></h1>
         <p class="application-fyi">All fields marked with * are required and must be filled out.
           <br>
           This application can only be completed once.
@@ -138,7 +138,7 @@
             </div>
             
             <div class="input-box">
-            <span class="details">Skills:</span>
+              <span class="details">Skills:</span>
               <textarea id="skill-input" name="paragraph_text" cols="32" rows="3" placeholder="List all Skills if any" maxlength="300"></textarea>
             </div>
   
@@ -147,16 +147,23 @@
             <input id="resume-input" type="file" placeholder="Choose File" accept=".pdf">
             </div>
             <p id="incomplete-application-notice">Please make sure all required fields are filled out</p>
-          <button type="button" class="submit" onclick="submitApplication1()">Submit</button>
+          <button type="button" class="submit" onclick="submitApplication()">Submit</button>
         </div>  
       </div>
     </div>
   
-    <div id="submit-application-notice-1" class="submit-notice">
+    <!-- <div id="submit-application-notice-1" class="submit-notice">
       <h1>Are you sure you want to submit?</h1>
       <p>Make sure all of your information is correct.</p>
-            <button type="button" id="confirm-submit-1" class="confirm-button hover-underline" onclick="confirmSubmit1()">Yes</button><button id="reject-submit-1" class="reject-button hover-underline" onclick="rejectSubmit1()">No</button>
-    </div>
+            <button type="button" id="confirm-submit-1" class="confirm-button hover-underline" onclick="confirmSubmit()">Yes</button><button id="reject-submit-1" class="reject-button hover-underline" onclick="rejectSubmit()">No</button>
+    </div> -->
+
+    <!-- <dialog class="modal">
+      <h2>Are you sure you want to submit?</h2>
+      <p>Make sure all of your information is correct.</p>
+      <button type="button" id="confirm-submit-1" class="confirm-button hover-underline" onclick="confirmSubmit()">Yes</button>
+      <button type="button" id="reject-submit-1" class="reject-button hover-underline" onclick="rejectSubmit()">No</button>
+    </dialog> -->
   
   
     <div id="application-1-done" class="application-done">
