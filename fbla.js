@@ -755,11 +755,14 @@ if (document.body.contains(applicationInfo)) {
     //   }
     // if (arrayOfObjects.some(obj => Object.values(obj).includes(targetString))) {
       
+    console.log(currentUser[0].jobsApplied.some(job => Object.values(job).includes(filteredJob[0].id)));
     
     // if (filteredJob.length > 0) {
     if (currentUser[0].jobsApplied.some(job => Object.values(job).includes(filteredJob[0].id))) {
-        // let jobsArray = Object.values(currentUser[0].jobsApplied);
-        // let filterJob = jobsArray.filter(value => value.jobApplicationInfo.job == "job-1");
+    // if (arrayOfObjects.some(obj => obj.job === 'job 1')) {
+    // if (arrayOfObjects.some(obj => obj.job === 'job 1')) {
+        let jobsArray = Object.values(currentUser[0].jobsApplied);
+        let filterJob = jobsArray.filter(value => value.jobApplicationInfo.job == "job-1");
         // console.log(jobsArray);
         // console.log(filterJob);
         applicationForm.style.display = "none";
