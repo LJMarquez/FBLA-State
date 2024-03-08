@@ -147,7 +147,7 @@
             <input id="resume-input" type="file" placeholder="Choose File" accept=".pdf">
             </div>
             <p id="incomplete-application-notice">Please make sure all required fields are filled out</p>
-          <button type="button" class="submit" onclick="submitApplication()">Submit</button>
+          <button type="button" class="submit application-submit" onclick="submitApplication()">Submit</button>
         </div>  
       </div>
     </div>
@@ -158,15 +158,15 @@
             <button type="button" id="confirm-submit-1" class="confirm-button hover-underline" onclick="confirmSubmit()">Yes</button><button id="reject-submit-1" class="reject-button hover-underline" onclick="rejectSubmit()">No</button>
     </div> -->
 
-    <!-- <dialog class="modal">
+    <dialog class="modal">
       <h2>Are you sure you want to submit?</h2>
       <p>Make sure all of your information is correct.</p>
       <button type="button" id="confirm-submit-1" class="confirm-button hover-underline" onclick="confirmSubmit()">Yes</button>
-      <button type="button" id="reject-submit-1" class="reject-button hover-underline" onclick="rejectSubmit()">No</button>
-    </dialog> -->
+      <button type="button" id="reject-submit-1" class="close-modal">No</button>
+    </dialog>
   
   
-    <div id="application-1-done" class="application-done">
+    <div id="application-done" class="application-done">
         <h1>Thanks for applying!</h1>
         <h2>We will get back to you once we have processed your application.</h2>
         <a href="profile.html">Account</a>

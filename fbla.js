@@ -226,6 +226,8 @@ const skillsHolder = document.getElementById('skills-holder');
 const resumeHolder = document.getElementById('resume-holder');
 const incompleteApplicationNotice = document.getElementById('incomplete-application-notice');
 
+const applicationSubmit = document.querySelector('.application-submit');
+
 
 //log in variables
 let username;
@@ -556,12 +558,6 @@ if (document.body.contains(modal)) {
     })
 }
 
-//variables to capture the date the application was submitted
-const date = new Date();
-const year = date.getFullYear();
-const month = date.getMonth() + 1;
-const day = date.getDate();
-const fullDate = `${month}/${day}/${year}`;
 
 const dateApplied1 = document.getElementById('job-1-date-applied');
 const dateApplied2 = document.getElementById('job-2-date-applied');
@@ -572,6 +568,18 @@ const dateApplied3 = document.getElementById('job-3-date-applied');
 //functions for submitting the applications
 //these functions store the application info in local storage for later access
 function confirmSubmit() {
+
+    // applicationSubmit.addEventListener("click", (e) => {
+
+    // })
+    
+    //variables to capture the date the application was submitted
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const fullDate = `${month}/${day}/${year}`;
+
     let storedJobsArray = Object.values(jobList);
     let filteredJob = storedJobsArray.filter(value => value.id == localStorage.getItem("targetJob"));
 
@@ -598,10 +606,11 @@ function confirmSubmit() {
     currentUser[0].jobsApplied.push(jobApplicationInfo);
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-    applicationWrapper.style.opacity = "1";
-    submitApplicationNotice1.style.display = "none";
-    application1Form.style.display = "none";
-    application1Done.style.display = "block";
+    // applicationWrapper.style.opacity = "1";
+    // submitApplicationNotice.style.display = "none";
+    modal.close();
+    applicationForm.style.display = "none";
+    applicationDone.style.display = "block";
 }
 
 // function confirmSubmit2() {
@@ -666,7 +675,7 @@ function confirmSubmit() {
 
 
 //these funcitons check to make sure all of the REQUIRED fields are filled out
-function submitApplication1() {
+function submitApplication() {
     if (
         firstNameInput.value == "" ||
         lastNameInput.value == "" ||
@@ -681,13 +690,15 @@ function submitApplication1() {
         incompleteApplicationNotice.style.display = "block";
     } else {
         incompleteApplicationNotice.style.display = "none";
-        submitApplicationNotice1.style.display = "block";
-        applicationWrapper.style.opacity = ".3"
+        // submitApplicationNotice.style.display = "block";
+        modal.showModal();
+        // applicationWrapper.style.opacity = ".3"
     }
 }
 function rejectSubmit1() {
-    submitApplicationNotice1.style.display = "none";
-    applicationWrapper.style.opacity = "1";
+    // submitApplicationNotice1.style.display = "none";
+    modal.close();
+    // applicationWrapper.style.opacity = "1";
 }
 
 // function submitApplication2() {
@@ -751,20 +762,18 @@ if (document.body.contains(applicationInfo)) {
     let filteredJob = storedJobsArray.filter(value => value.id == localStorage.getItem("targetJob"));
     applicationName.innerHTML = `${filteredJob[0].jobTitle}`;
 
-    // if (vendors.find(e => e.Name === 'Magenic')) {
-    //   }
-    // if (arrayOfObjects.some(obj => Object.values(obj).includes(targetString))) {
-      
-    console.log(currentUser[0].jobsApplied.some(job => Object.values(job).includes(filteredJob[0].id)));
+    console.log(currentUser[0].jobsApplied);
+    console.log(currentUser[0].jobsApplied[3].jobApplicationInfo)
+    console.log(currentUser[0].jobsApplied.some(job => job.jobApplicationInfo.job == filteredJob[0].id));
     
-    // if (filteredJob.length > 0) {
-    if (currentUser[0].jobsApplied.some(job => Object.values(job).includes(filteredJob[0].id))) {
-    // if (arrayOfObjects.some(obj => obj.job === 'job 1')) {
+    if (currentUser[0].jobsApplied.some(job => job.jobApplicationInfo.job == filteredJob[0].id)) {
     // if (arrayOfObjects.some(obj => obj.job === 'job 1')) {
         let jobsArray = Object.values(currentUser[0].jobsApplied);
-        let filterJob = jobsArray.filter(value => value.jobApplicationInfo.job == "job-1");
+        let filterJob = currentUser[0].jobsApplied.filter(job => job.jobApplicationInfo.job === filteredJob[0].id);
         // console.log(jobsArray);
-        // console.log(filterJob);
+        console.log(jobsArray[3].jobApplicationInfo.job);
+        // console.log(filteredJob);
+        console.log(filterJob);
         applicationForm.style.display = "none";
         applicationInfo.style.display = "block";
         firstNameDisplay.textContent = filterJob[0].jobApplicationInfo.firstName;
