@@ -20,7 +20,6 @@ body {
 }
 
 nav {
-    /* background-color: rgba(8, 126, 139); */
     width: 100%;
     height: 10vh;
     display: flex;
@@ -409,8 +408,8 @@ nav > img {
     display: none;
 }
 
-#job-1 {
-    /* display: none; */
+/* #job-1 {
+    display: none;
 }
 
 #job-2 {
@@ -419,7 +418,7 @@ nav > img {
 
 #job-3 {
     display: none;
-}
+} */
 
 .profile-job-container {
     width: 50%;
@@ -598,9 +597,9 @@ nav > img {
     margin-bottom: 10vh;
 }
 
-#job-1-container {
+/* #job-1-container {
     border: .3vw solid #7A9AE4;
-}
+} */
 
 .job-apply {
     padding: 2vw;
@@ -611,13 +610,13 @@ nav > img {
     display: none;
 } */
 
-#job-apply-2 {
+/* #job-apply-2 {
     display: none;
 }
 
 #job-apply-3 {
     display: none;
-}
+} */
 
 .apply {
     background-color: #11EED8;
@@ -979,7 +978,7 @@ footer {
     text-decoration: underline;
 }
 
-#submit-application-notice-1 {
+/* #submit-application-notice-1 {
     display: none;
 }
 
@@ -989,7 +988,7 @@ footer {
 
 #submit-application-notice-3 {
     display: none;
-}
+} */
 
 #incomplete-application-notice {
     display: none;

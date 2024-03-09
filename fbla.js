@@ -35,7 +35,7 @@ const length = document.getElementById('length');
 
 //job list elements
 class Job {
-    constructor(jobTitle, location, salary, summary, type, requirements, responsibilities, benefits, workLocation, id, jobContainer) {
+    constructor(jobTitle, location, salary, summary, type, requirements, responsibilities, benefits, workLocation, id, imgSrc, jobContainer) {
         this.jobTitle = jobTitle;
         this.location = location;
         this.salary = salary;
@@ -46,6 +46,7 @@ class Job {
         this.benefits = benefits;
         this.workLocation = workLocation;
         this.id = id;
+        this.imgSrc = imgSrc;
         this.jobContainer = jobContainer;
     }
     // populateJobInfo() {
@@ -78,7 +79,8 @@ const jobList = [
     "Participate in brainstorming sessions to generate innovative ideas."],
     jobBenefits,
     "In person",
-    "softwareEnginner"
+    "softwareEnginner",
+    "./assets/female-coder.jpg"
     ),
     new Job(
         "Hardware Innovation Specialist",
@@ -101,7 +103,8 @@ const jobList = [
         "Provide technical support to other teams and departments."],
         jobBenefits,
         "In person",
-        "hardwareSpecialist"
+        "hardwareSpecialist",
+        "./assets/coder-thinking.jpg"
     ),
     new Job(
         "Technology Solutions Consultant",
@@ -124,7 +127,8 @@ const jobList = [
         "Contribute to the development of proposals and presentations for clients."],
         jobBenefits,
         "In person",
-        "consultant"
+        "consultant",
+        "./assets/counseling.jpg"
     ),
 ];
 
@@ -658,7 +662,8 @@ if (document.body.contains(applicationInfo)) {
     // if the user has already applied to the target job it will show their info and not let them apply again
     if (currentUser[0].jobsApplied.some(job => job.jobApplicationInfo.job == filteredJob[0].id)) {
         // finds the users application info
-        let jobsArray = Object.values(currentUser[0].jobsApplied);
+
+        // let jobsArray = Object.values(currentUser[0].jobsApplied);
         let filterJob = currentUser[0].jobsApplied.filter(job => job.jobApplicationInfo.job == filteredJob[0].id);
         applicationForm.style.display = "none";
         applicationInfo.style.display = "block";
@@ -724,11 +729,30 @@ if (document.body.contains(profileUsername)) {
     profileUsername.textContent = currentUser[0].userName;
 
     let jobsAppliedArray = currentUser[0].jobsApplied;
-    console.log(jobsAppliedArray);
+    // console.log(jobsAppliedArray);
     // let filterJob1 = jobsArray.filter(value => value.jobApplicationInfo.job == "job-1");
 
     jobsAppliedArray.forEach((job) => {
-        
+        // console.log(job);
+        let storedJobsArray = Object.values(jobList);
+        // console.log(storedJobsArray);
+        let storedFilteredJob = storedJobsArray.filter(value => value.id == job.jobApplicationInfo.job);
+        // console.log(storedFilteredJob);
+
+
+        let appliedJobDiv = document.createElement('div');
+        appliedJobDiv.classList.add('profile-job-container');
+        appliedJobDiv.innerHTML = `<div class="profile-column">
+        <h3>${storedFilteredJob[0].jobTitle}</h3>
+        <p>Date Applied:</p>
+        <p id="job-1-date-applied">${job.jobApplicationInfo.dateApplied}</p>
+        <a href="application.html">More</a>
+        </div>
+        <div class="profile-column">
+            <img src="${storedFilteredJob[0].imgSrc}">
+        </div>`;
+
+        jobsAppliedFor.appendChild(appliedJobDiv);
     })
 
     // if (jobsArray.length == 0) {
