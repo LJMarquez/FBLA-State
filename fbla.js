@@ -49,10 +49,6 @@ class Job {
         this.imgSrc = imgSrc;
         this.jobContainer = jobContainer;
     }
-    // populateJobInfo() {
-    //     jobListColumn.innerHTML = "";
-    //     jobListColumn.appendChild(this.jobContainer);
-    // }
 }
 
 jobBenefits = ["401(k)", "401(k) matching", "Dental Insurance", "Employee assistance program", "Health Insurance", "Health savings account", "Life insurance", "Professional development assistance", "Referral program", "Retirement plan", "Vision insurance"];
@@ -134,29 +130,15 @@ const jobList = [
 
 const jobOpenings = document.getElementById("job-openings");
 const jobListColumn = document.getElementById("job-list-column-2");
-// const jobInfo = document.getElementById("job-info");
 
-// const pleaseLogIn = document.getElementById('please-log-in');
 const modal = document.querySelector('.modal');
 const modalClose = document.querySelector('.close-modal');
 const noApplications = document.getElementById('no-applications');
 const jobListWrapper = document.getElementById('job-list-wrapper');
 
-// const job1Container = document.getElementById('job-1-container');
-// const job2Container = document.getElementById('job-2-container');
-// const job3Container = document.getElementById('job-3-container');
-
 const jobApply = document.getElementById('job-apply');
-// const jobApply2 = document.getElementById('job-apply-2');
-// const jobApply3 = document.getElementById('job-apply-3');
 
-const jobInfo1 = document.getElementById('job-info-1');
-// const jobInfo2 = document.getElementById('job-info-2');
-// const jobInfo3 = document.getElementById('job-info-3');
-
-// const job1 = document.getElementById("job-1");
-// const job2 = document.getElementById("job-2");
-// const job3 = document.getElementById("job-3");
+// const jobInfo1 = document.getElementById('job-info-1');
 
 //profile elements
 const jobsAppliedFor = document.getElementById('jobs-applied-for');
@@ -175,21 +157,12 @@ const profilePageWrapper = document.getElementById('profile-page-wrapper');
 
 //application elements
 const applicationForm = document.getElementById("application-form");
-// const application2Form = document.getElementById("application-2-form");
-// const application3Form = document.getElementById("application-3-form");
 
 const applicationDone = document.getElementById('application-done');
-// const application2Done = document.getElementById('application-2-done');
-// const application3Done = document.getElementById('application-3-done');
 
 const applicationInfo = document.getElementById('application-info');
-// const application1Info = document.getElementById('application-1-info');
-// const application2Info = document.getElementById('application-2-info');
-// const application3Info = document.getElementById('application-3-info');
 
 const submitApplicationNotice = document.getElementById('submit-application-notice');
-// const submitApplicationNotice2 = document.getElementById('submit-application-notice-2');
-// const submitApplicationNotice3 = document.getElementById('submit-application-notice-3');
 
 const applicationWrapper = document.getElementById('application-wrapper');
 
@@ -522,21 +495,6 @@ function rejectLogOut() {
 }
 
 
-//apply functions to take the user to the application pages
-
-// function apply(job) {
-//     if (localStorage.getItem("loggedIn") == "true") {
-//         let jobsArray = Object.values(jobList.id);
-//         let filteredJob = jobsArray.filter(value => value.id == job);
-//         localStorage.setItem("applicationTarget", JSON.stringify(filteredJob[0]));
-//         console.log("im applying!")
-//     } else {
-//         pleaseLogIn.style.display = "block";
-//         jobListWrapper.style.opacity = ".3";
-//     }
-// }
-
-
 //functions to direct the user to job page or log in page
 function goToLogIn() {
     document.location.href = "log-in.html";
@@ -563,19 +521,9 @@ if (document.body.contains(modal)) {
 }
 
 
-const dateApplied1 = document.getElementById('job-1-date-applied');
-const dateApplied2 = document.getElementById('job-2-date-applied');
-const dateApplied3 = document.getElementById('job-3-date-applied');
-
-
-
 //functions for submitting the applications
 //these functions store the application info in local storage for later access
 function confirmSubmit() {
-
-    // applicationSubmit.addEventListener("click", (e) => {
-
-    // })
     
     //variables to capture the date the application was submitted
     const date = new Date();
@@ -610,8 +558,6 @@ function confirmSubmit() {
     currentUser[0].jobsApplied.push(jobApplicationInfo);
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-    // applicationWrapper.style.opacity = "1";
-    // submitApplicationNotice.style.display = "none";
     modal.close();
     applicationForm.style.display = "none";
     applicationDone.style.display = "block";
@@ -634,15 +580,11 @@ function submitApplication() {
         incompleteApplicationNotice.style.display = "block";
     } else {
         incompleteApplicationNotice.style.display = "none";
-        // submitApplicationNotice.style.display = "block";
         modal.showModal();
-        // applicationWrapper.style.opacity = ".3"
     }
 }
 function rejectSubmit1() {
-    // submitApplicationNotice1.style.display = "none";
     modal.close();
-    // applicationWrapper.style.opacity = "1";
 }
 
 
@@ -729,16 +671,10 @@ if (document.body.contains(profileUsername)) {
     profileUsername.textContent = currentUser[0].userName;
 
     let jobsAppliedArray = currentUser[0].jobsApplied;
-    // console.log(jobsAppliedArray);
-    // let filterJob1 = jobsArray.filter(value => value.jobApplicationInfo.job == "job-1");
 
     jobsAppliedArray.forEach((job) => {
-        // console.log(job);
         let storedJobsArray = Object.values(jobList);
-        // console.log(storedJobsArray);
         let storedFilteredJob = storedJobsArray.filter(value => value.id == job.jobApplicationInfo.job);
-        // console.log(storedFilteredJob);
-
 
         let appliedJobDiv = document.createElement('div');
         appliedJobDiv.classList.add('profile-job-container');
@@ -754,25 +690,6 @@ if (document.body.contains(profileUsername)) {
 
         jobsAppliedFor.appendChild(appliedJobDiv);
     })
-
-    // if (jobsArray.length == 0) {
-    //     noApplications.style.display = "block";
-    // } else {
-    //     if (filterJob1.length > 0) {
-    //         job1.style.display = "grid";
-    //         dateApplied1.textContent = filterJob1[0].jobApplicationInfo.dateApplied;
-    //     }
-    
-    //     if (filterJob2.length > 0) {
-    //         job2.style.display = "grid";
-    //         dateApplied2.textContent = filterJob2[0].jobApplicationInfo.dateApplied;
-    //     }
-    
-    //     if (filterJob3.length > 0) {
-    //         job3.style.display = "grid";
-    //         dateApplied3.textContent = filterJob3[0].jobApplicationInfo.dateApplied;
-    //     }
-    // }
 }
 
 
@@ -803,9 +720,6 @@ if (document.body.contains(jobOpenings)) {
     jobList.map((job) => {
         let jobDiv = document.createElement('div');
         jobDiv.classList.add('job-container');
-
-        // jobDiv.id = `${job.id}`;
-
 
         let jobTitleHeader = document.createElement('h1');
         jobTitleHeader.textContent = `${job.jobTitle}`;
@@ -939,7 +853,6 @@ if (document.body.contains(jobOpenings)) {
                     targetJob = event.target.name;
                     let jobsArray = Object.values(jobList);
                     let filteredJob = jobsArray.filter(value => value.id == targetJob);
-                    console.log(targetJob);
                     document.location.href = "application.html";
                     localStorage.setItem("targetJob", targetJob);
                 } else {
@@ -956,7 +869,6 @@ if (document.body.contains(jobOpenings)) {
             targetJob = event.target.name;
             let jobsArray = Object.values(jobList);
             let filteredJob = jobsArray.filter(value => value.id == targetJob);
-            console.log(targetJob);
             document.location.href = "application.html";
             localStorage.setItem("targetJob", targetJob);
         } else {

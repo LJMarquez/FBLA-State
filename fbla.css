@@ -4,15 +4,30 @@
 7A9AE4
 11EED8 */
 
-/* @media (min-width: 1280px) { */
+@media (min-width: 0px) and (max-width: 768px) {
+    body {
+        background-color: red;
+    }
+}
 
+@media (min-width: 769px) and (max-width: 1280px) {
+    body {
+        background-color: green;
+    }
+}
+
+@media (min-width: 1280px) {
+    body {
+        background: #070436;
+    }
+}
 body, html {
     margin: 0;
     scroll-behavior: smooth;
 }
 
 body {
-    background-color: #070436;
+    /* background-color: #070436; */
     color: white;
     font-family: 'Ubuntu', sans-serif;
     overflow-y: scroll;
@@ -574,6 +589,9 @@ nav > img {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
 }
 
 #job-list-title {
@@ -597,26 +615,10 @@ nav > img {
     margin-bottom: 10vh;
 }
 
-/* #job-1-container {
-    border: .3vw solid #7A9AE4;
-} */
-
 .job-apply {
     padding: 2vw;
     height: 34vh;
 }
-
-/* #job-apply-1 {
-    display: none;
-} */
-
-/* #job-apply-2 {
-    display: none;
-}
-
-#job-apply-3 {
-    display: none;
-} */
 
 .apply {
     background-color: #11EED8;
@@ -648,18 +650,6 @@ nav > img {
 
 .job-container-info > p {
     margin-bottom: 5vh;
-}
-
-/* #job-container-info-1 {
-    display: none;
-} */
-
-#job-container-info-2 {
-    display: none;
-}
-
-#job-container-info-3 {
-    display: none;
 }
 
 .modal {
@@ -978,18 +968,6 @@ footer {
     text-decoration: underline;
 }
 
-/* #submit-application-notice-1 {
-    display: none;
-}
-
-#submit-application-notice-2 {
-    display: none;
-}
-
-#submit-application-notice-3 {
-    display: none;
-} */
-
 #incomplete-application-notice {
     display: none;
 }
@@ -1031,7 +1009,6 @@ footer {
 }
 /* ***************************End of application page****************************** */
 
-/* } */
 
 .job-container:hover {
     text-decoration: underline;
