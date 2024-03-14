@@ -968,9 +968,9 @@ footer {
     text-decoration: underline;
 }
 
-#incomplete-application-notice {
+/* #incomplete-application-notice {
     display: none;
-}
+} */
 
 .submitted-info {
     display: none;

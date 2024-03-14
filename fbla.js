@@ -35,7 +35,7 @@ const length = document.getElementById('length');
 
 //job list elements
 class Job {
-    constructor(jobTitle, location, salary, summary, type, requirements, responsibilities, benefits, workLocation, id, imgSrc, jobContainer) {
+    constructor(jobTitle, location, salary, avgSalary, summary, type, requirements, responsibilities, benefits, workLocation, id, imgSrc, jobContainer) {
         this.jobTitle = jobTitle;
         this.location = location;
         this.salary = salary;
@@ -56,8 +56,9 @@ jobBenefits = ["401(k)", "401(k) matching", "Dental Insurance", "Employee assist
 const jobList = [
     new Job(
     "Software Engineer",
-    "6997 N Glen Harbor Blvd", 
-    "$90,000 - $130,000", 
+    "6997 N Glen Harbor Blvd",
+    "$90,000 - $130,000",
+    1,
     "Design and implement cutting-edge algorithms, collaborating with cross-functional teams to develop advanced software solutions. Stay at the forefront of innovation, conducting code reviews, and optimizing performance to solve complex problems in the field of advanced computing",
     "Full-time",
     ["Proven experience in developing cutting-edge algorithms and advanced software solutions.", 
@@ -81,7 +82,8 @@ const jobList = [
     new Job(
         "Hardware Innovation Specialist",
         "6997 N Glen Harbor Blvd", 
-        "$85,000 - $120,000", 
+        "$85,000 - $120,000",
+        2,
         "Innovate and design hardware components, ensuring seamless integration with software solutions and pushing the boundaries of technology. Optimize and troubleshoot hardware for efficiency, contributing to the development of design specifications in pursuit of computing advancements.",
         "Full-time",
         ["Proven experience in designing and optimizing hardware components.", 
@@ -105,7 +107,8 @@ const jobList = [
     new Job(
         "Technology Solutions Consultant",
         "6997 N Glen Harbor Blvd", 
-        "$80,000 - $110,000", 
+        "$80,000 - $110,000",
+        3,
         "Collaborate with clients to understand business needs, providing strategic technology solutions and translating complex concepts into tangible business benefits. Stay informed about industry trends, offering expertise in integrating advanced technologies into diverse business operations.",
         "Full-time",
         ["Proven experience as a technology consultant or in a similar role.", 
@@ -566,6 +569,8 @@ function confirmSubmit() {
 
 //these funcitons check to make sure all of the REQUIRED fields are filled out
 function submitApplication() {
+    const emailPattern = /^[a-zA-Z0-9._-]{1,16}@[a-zA-Z0-9-]+\.[a-zA-Z]{2,4}$/;
+
     if (
         firstNameInput.value == "" ||
         lastNameInput.value == "" ||
@@ -577,11 +582,28 @@ function submitApplication() {
         experienceSelect.value == "" ||
         educationSelect.value == ""
     ) {
-        incompleteApplicationNotice.style.display = "block";
+        incompleteApplicationNotice.innerHTML = "Please make sure all required fields are filled out";
+    } else if (!emailPattern.test(emailInput.value)) {
+        incompleteApplicationNotice.innerHTML = "Please make sure you entered a valid email";
+    } else if (!phoneNumberPattern.test(phoneNumberInput.value)) {
+        incompleteApplicationNotice.innerHTML = "Please make sure you entered a valid phone number";
+        //add social security, address
     } else {
         incompleteApplicationNotice.style.display = "none";
         modal.showModal();
     }
+    // if (
+    //     firstNameInput.value != "" ||
+    //     lastNameInput.value != "" ||
+    //     birthdayInput.value != "" ||
+    //     phoneNumberInput.value != "" ||
+    //     emailInput.value != "" ||
+    //     socialSecurityInput.value != "" ||
+    //     addressInput.value != "" ||
+    //     experienceSelect.value != "" ||
+    //     educationSelect.value != "" &&
+    //     emailPattern.test(emailInput.value)
+    // ) {
 }
 function rejectSubmit1() {
     modal.close();
