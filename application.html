@@ -79,7 +79,7 @@
             
             <div class="input-box">
             <span class="details">Phone Number*</span>
-            <input id="phoneNumber-input" type="tel" placeholder="(nnn)-nnn-nnnn" required>
+            <input id="phoneNumber-input" type="tel" placeholder="(###)###-####" maxlength="15" onInput="this.value = phoneFormat(this.value)" required>
             </div>
            
             <div class="input-box">
@@ -89,7 +89,7 @@
             
             <div class="input-box">
             <span class="details">Social Security*</span>
-            <input id="socialSecurity-input" type="text" placeholder="Social Security" required>
+            <input id="socialSecurity-input" type="text" placeholder="Social Security" onInput="this.value = socialSecurityFormat(this.value)" required>
             </div>
             
             <div class="input-box">

@@ -567,9 +567,32 @@ function confirmSubmit() {
 }
 
 
+
+function phoneFormat(input) {
+    input = input.replace(/\D/g,'').substring(0,10); //Strip everything but 1st 10 digits
+    let size = input.length;
+    if (size>0) {input="("+input}
+    if (size>3) {input=input.slice(0,4)+") "+input.slice(4)}
+    if (size>6) {input=input.slice(0,9)+"-" +input.slice(9)}
+    return input;
+}
+
+function socialSecurityFormat(input) {
+    input = input.replace(/\D/g,'').substring(0,9); //Strip everything but 1st 10 digits
+    let size = input.length;
+    if (size>3) {input=input.slice(0,3)+"-"+input.slice(3)}
+    if (size>6) {input=input.slice(0,6)+"-" +input.slice(6)}
+    return input;
+}
+
+
+
 //these funcitons check to make sure all of the REQUIRED fields are filled out
 function submitApplication() {
     const emailPattern = /^[a-zA-Z0-9._-]{1,16}@[a-zA-Z0-9-]+\.[a-zA-Z]{2,4}$/;
+    const phoneNumberPattern = /\(\d{3}\) \d{3}-\d{4}/g;
+    const socialSecurityPattern = /\d{3}-\d{2}-\d{4}/g;
+    const addressPattern = /^[#.0-9a-z\s,-]+$/gi;
 
     if (
         firstNameInput.value == "" ||
@@ -587,26 +610,14 @@ function submitApplication() {
         incompleteApplicationNotice.innerHTML = "Please make sure you entered a valid email";
     } else if (!phoneNumberPattern.test(phoneNumberInput.value)) {
         incompleteApplicationNotice.innerHTML = "Please make sure you entered a valid phone number";
-        //add social security, address
+    } else if (!socialSecurityPattern.test(socialSecurityInput.value)) {
+        incompleteApplicationNotice.innerHTML = "Please make sure you entered a valid social security number";
+    } else if (!addressPattern.test(addressInput.value)) {
+        incompleteApplicationNotice.innerHTML = "Please make sure you entered a valid address";
     } else {
-        incompleteApplicationNotice.style.display = "none";
+        incompleteApplicationNotice.innerHTML = "";
         modal.showModal();
     }
-    // if (
-    //     firstNameInput.value != "" ||
-    //     lastNameInput.value != "" ||
-    //     birthdayInput.value != "" ||
-    //     phoneNumberInput.value != "" ||
-    //     emailInput.value != "" ||
-    //     socialSecurityInput.value != "" ||
-    //     addressInput.value != "" ||
-    //     experienceSelect.value != "" ||
-    //     educationSelect.value != "" &&
-    //     emailPattern.test(emailInput.value)
-    // ) {
-}
-function rejectSubmit1() {
-    modal.close();
 }
 
 
