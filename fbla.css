@@ -8,6 +8,65 @@
     body {
         background-color: red;
     }
+    nav {
+        position: fixed;
+        left: 0%;
+        top: 0%;
+        z-index: 1;
+    }
+    nav > a {
+        text-decoration: none;
+        border-radius: 1vw;
+        text-align: center;
+        color: white;
+        font-size: 1.5vw;
+        width: 15%;
+        display: inline-block;
+        margin: 0 2%;
+        display: none;
+    }
+    #company-name {
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 4vh;
+        font-size: 2rem;
+        padding-right: 10vw;
+    }
+
+    #menu {
+        height: 80%;
+        padding-top: 3%;
+        padding-left: 5%;
+        float: left;
+        display: block; 
+        z-index: 3;
+    }
+    #menu-content {
+        z-index: 2;
+        right: 0;
+        top: 0;
+        position: fixed;
+        height: 100vh;
+        width: 30vw;
+        background-color: white;
+        color: #070436;
+        padding: 5%;
+        font-size: 3vw;
+    }
+    #menu-content > h1 {
+        margin-bottom: 10vh;
+    }
+    #menu-content > a {
+        /* color: #070436; */
+        display: block;
+        margin-bottom: 6vh;
+        text-decoration: none;
+        padding: 1vh;
+        font-size: 5vw;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1280px) {
@@ -19,6 +78,19 @@
 @media (min-width: 1280px) {
     body {
         background: #070436;
+    }
+    #menu {
+        display: none;
+    }
+    nav > a {
+        text-decoration: none;
+        border-radius: 1vw;
+        text-align: center;
+        color: white;
+        font-size: 1.5vw;
+        width: 15%;
+        display: inline-block;
+        margin: 0 2%;
     }
 }
 body, html {
@@ -40,10 +112,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    /* position: fixed; */
-    /* left: 0%; */
-    /* top: 0%; */
-    /* z-index: 1; */
+
 }
 
 #company-name {
@@ -57,7 +126,7 @@ nav {
     line-height: 5vh;
 }
 
-nav > a {
+/* nav > a {
     text-decoration: none;
     border-radius: 1vw;
     text-align: center;
@@ -66,16 +135,13 @@ nav > a {
     width: 15%;
     display: inline-block;
     margin: 0 2%;
-}
+} */
 
 #account-tab-icon {
     width: 25%;
     padding-top: 1vh;
 }
 
-#menu {
-    display: none;
-}
 
 #menu-content {
     display: none;
