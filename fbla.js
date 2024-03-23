@@ -773,6 +773,27 @@ if (document.body.contains(jobOpenings)) {
         
         jobOpenings.appendChild(jobDiv);
 
+        let mobileJobDiv = document.createElement('div');
+        mobileJobDiv.setAttribute("id", `${job.id}`);
+        mobileJobDiv.classList.add('job-container-mobile');
+        mobileJobDiv.innerHTML = `<h1>${job.jobTitle}</h1>
+        <p>${job.location}</p>
+        <p>${job.salary} per year</p>
+        <p>${job.summary}</p>`;
+
+        jobOpenings.appendChild(mobileJobDiv);
+
+        mobileJobDiv.addEventListener('click', (e) => {
+            if (localStorage.getItem("loggedIn") == 'true') {
+                targetJob = e.currentTarget.id;
+                let jobsArray = Object.values(jobList);
+                let filteredJob = jobsArray.filter(value => value.id == targetJob);
+                document.location.href = "application.html";
+                localStorage.setItem("targetJob", targetJob);
+            } else {
+                modal.showModal();
+            }
+        })
         
         let jobApplyDiv = document.createElement('div');
         jobApplyDiv.classList.add('job-apply');
@@ -866,7 +887,6 @@ if (document.body.contains(jobOpenings)) {
         
         jobDiv.addEventListener('click', () => {
             jobListColumn.innerHTML = job.jobContainer;
-
         })
         
     })
@@ -911,6 +931,23 @@ if (document.body.contains(jobOpenings)) {
 
 }
 
+
+const headerBackgrounds = document.querySelectorAll('.background');
+let imageIndex = 0;
+
+function changeBackground() {
+    headerBackgrounds[imageIndex].classList.remove("showing");
+    imageIndex++
+
+    if (imageIndex >= headerBackgrounds.length) {
+        imageIndex = 0;
+    }
+
+    headerBackgrounds[imageIndex].classList.add("showing");
+
+}
+
+setInterval(changeBackground, 6000);
 
 
 
