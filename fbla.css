@@ -1642,11 +1642,13 @@ nav > img {
     border: .5vw solid #11EED8;
     border-radius: 1vw;
     animation: fade 2s 4s ease forwards;
+    transition: color .5s, background-color .5s;
 }
 
 #open-job-list:hover {
     background-color: #070436;
     color: #11EED8;
+    transition: color .5s, background-color .5s;
 }
 
 .home-section {
